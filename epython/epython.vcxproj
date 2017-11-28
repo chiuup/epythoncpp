@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -100,7 +100,7 @@
 xcopy /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.zip $(TargetDir)epython\$(PlatformTarget)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.dll $(TargetDir)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36_d.dll $(TargetDir)
-xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
+xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,7 +118,7 @@ xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
 xcopy /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.zip $(TargetDir)epython\$(PlatformTarget)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.dll $(TargetDir)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36_d.dll $(TargetDir)
-xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
+xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,7 +139,7 @@ xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
 xcopy /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.zip $(TargetDir)epython\$(PlatformTarget)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.dll $(TargetDir)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36_d.dll $(TargetDir)
-xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
+xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,17 +160,27 @@ xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
 xcopy /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.zip $(TargetDir)epython\$(PlatformTarget)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36.dll $(TargetDir)
 xcopy /C /Y /D $(ProjectDir)epython\$(PlatformTarget)\$(Configuration)\python36_d.dll $(TargetDir)
-xcopy /Y /D $(ProjectDir)test.py $(TargetDir)</Command>
+xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cpython\cpydict.cpp" />
+    <ClCompile Include="cpython\cpyinterpreter.cpp" />
+    <ClCompile Include="cpython\cpyobject.cpp" />
+    <ClCompile Include="cpython\cpython.cpp" />
+    <ClCompile Include="cpython\cpytuple.cpp" />
     <ClCompile Include="epython.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="test.py" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cpython.h" />
+    <ClInclude Include="cpython\cpydict.h" />
+    <ClInclude Include="cpython\cpygil.h" />
+    <ClInclude Include="cpython\cpyinterpreter.h" />
+    <ClInclude Include="cpython\cpyobject.h" />
+    <ClInclude Include="cpython\cpython.h" />
+    <ClInclude Include="cpython\cpytuple.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

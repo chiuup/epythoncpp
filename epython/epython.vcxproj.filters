@@ -13,10 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="cpython">
+      <UniqueIdentifier>{9bf2eb64-31f7-450c-b266-976ec10fa6dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="epython.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpython\cpython.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
+    <ClCompile Include="cpython\cpyobject.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
+    <ClCompile Include="cpython\cpyinterpreter.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
+    <ClCompile Include="cpython\cpytuple.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
+    <ClCompile Include="cpython\cpydict.cpp">
+      <Filter>cpython</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -25,8 +43,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cpython.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="cpython\cpython.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpyobject.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpyinterpreter.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpygil.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpytuple.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpydict.h">
+      <Filter>cpython</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
