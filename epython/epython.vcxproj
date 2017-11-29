@@ -166,6 +166,7 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
   <ItemGroup>
     <ClCompile Include="cpython\cpydict.cpp" />
     <ClCompile Include="cpython\cpyinterpreter.cpp" />
+    <ClCompile Include="cpython\cpymodule.cpp" />
     <ClCompile Include="cpython\cpyobject.cpp" />
     <ClCompile Include="cpython\cpython.cpp" />
     <ClCompile Include="cpython\cpytuple.cpp" />
@@ -176,11 +177,15 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpython\cpydict.h" />
+    <ClInclude Include="cpython\cpyfunction.h" />
     <ClInclude Include="cpython\cpygil.h" />
     <ClInclude Include="cpython\cpyinterpreter.h" />
+    <ClInclude Include="cpython\cpymodule.h" />
     <ClInclude Include="cpython\cpyobject.h" />
+    <ClInclude Include="cpython\cpyscope.h" />
     <ClInclude Include="cpython\cpython.h" />
     <ClInclude Include="cpython\cpytuple.h" />
+    <ClInclude Include="cpython\preprocessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
