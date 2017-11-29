@@ -39,6 +39,9 @@
     <ClCompile Include="cpython\cpymodule.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
+    <ClCompile Include="cpython\cpyscope.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.py">

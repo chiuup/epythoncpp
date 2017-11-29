@@ -22,5 +22,3 @@ private:
 	CPyScope(const CPyScope&);
 	void operator=(const CPyScope&);
 };
-
-PyObject* CPyScope::currentScope_ = 0;

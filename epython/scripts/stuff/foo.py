@@ -16,6 +16,8 @@ else:
     print("ryan_engine is here!!")
     print(ryan_engine.__dict__);
     print(ryan_engine.hello())
+    from ryan_engine import hello
+    print(hello());
     print(ryan_engine.hello.__name__)
     print(ryan_engine.print1())
     print(barz.__name__)

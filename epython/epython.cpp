@@ -7,17 +7,16 @@
 #include "cpython/cpyinterpreter.h"
 #include "cpython/cpymodule.h"
 
+static PyObject* print1(PyObject* self, PyObject* args) {
+	return PyLong_FromLong(1);
+}
 static PyObject* hello(PyObject* self, PyObject* args) {
 	return PyUnicode_FromString("Hello World");
 }
 
-static PyObject* print1(PyObject* self, PyObject* args) {
-	return PyLong_FromLong(1);
-}
-
 CPYMODULE_INIT(ryan_engine) {
-	CPyModuleDef("hello", hello);
-	CPyModuleDef("print1", print1);
+	CPyModuleDef<hello>("hello");
+	CPyModuleDef<print1>("print1", METH_VARARGS, "prints 1");;
 }
 
 int main()

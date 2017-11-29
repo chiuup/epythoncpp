@@ -168,6 +168,7 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     <ClCompile Include="cpython\cpyinterpreter.cpp" />
     <ClCompile Include="cpython\cpymodule.cpp" />
     <ClCompile Include="cpython\cpyobject.cpp" />
+    <ClCompile Include="cpython\cpyscope.cpp" />
     <ClCompile Include="cpython\cpython.cpp" />
     <ClCompile Include="cpython\cpytuple.cpp" />
     <ClCompile Include="epython.cpp" />
