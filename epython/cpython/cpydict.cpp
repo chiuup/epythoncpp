@@ -3,6 +3,7 @@
 
 CPyDict::CPyDict()
 {
+	// New reference, DECREF in base destructor
 	PyObject* dict = PyDict_New();
 	assert(dict != NULL);
 	pyObject_ = dict;

@@ -12,15 +12,16 @@ public:
 
 	template<typename T>
 	T Get(unsigned int n) {
-		CPyObject item;
-		item = Get<PyObject*>(n);
-		return item.To<T>();
+		return CPyObject(Get<PyObject*>(n)).To<T>();
 	}
 
 	template<>
 	PyObject * CPyTuple::Get<PyObject*>(unsigned int n)
 	{
+		// Getting PyObject* will always be a new reference 
+		// instead of a borrowed reference in Python C API
 		PyObject* item = PyTuple_GetItem(pyObject(), n);
+		Py_INCREF(item);
 		return item;
 	}
 };

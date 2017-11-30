@@ -6,7 +6,6 @@ CPyTuple::CPyTuple(int n)
 	PyObject* tuple = PyTuple_New(n);
 	assert(tuple != NULL);
 
-	Release();
 	pyObject_ = tuple;
 }
 

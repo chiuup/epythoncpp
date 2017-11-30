@@ -32,17 +32,22 @@ int main()
 			PyErr_Print();
 		}
 		CPyObject bar = fooMod.GetAttr("bar"), foo = fooMod.GetAttr("Foo");
-		
+
 		assert(bar.pyObject() != NULL);
 		assert(bar.IsSubclass(&foo));
 		assert(CPyObject(bar()).IsInstance(&foo));
-		CPyObject p(PyLong_FromLong(50));
-		CPyObject q(PyUnicode_FromString("my_string"));
+		CPyNewReference p(PyLong_FromLong(-50));
+		CPyNewReference q(PyUnicode_FromString("my_string"));
 		CPyTuple tuple(10);
+
 		tuple.Set(0, &p);
 		tuple.Set(1, &q);
-		printf_s("Value = %ld\n", PyLong_AsLong(p));
-		printf_s("Value = %d\n", tuple.Get<int>(0));
+		CPyObject peek = tuple.Get<PyObject*>(1);
+		peek.Print();
+		CPyBorrowedReference no(peek);
+		// printf_s("Value = %ld\n", PyLong_AsLong(p));
+		//printf_s("Value = %d\n", tuple.Get<int>(0));
+		printf_s("Value = %u\n", tuple.Get<unsigned int>(0));
 		printf_s("Value = %s\n", tuple.Get<const char*>(1));
 	}
 

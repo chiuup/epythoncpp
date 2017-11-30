@@ -2,14 +2,14 @@
 #include "cpyobject.h"
 #include "cpytuple.h"
 
-CPyObject::CPyObject() :pyObject_(NULL) {
-}
-
-CPyObject::CPyObject(PyObject* p) :pyObject_(p) {
+CPyObject::CPyObject(PyObject* p, bool decRef) :pyObject_(p), decRef_(decRef) {
+	if (decRef_)
+		IncRef();
 }
 
 CPyObject::~CPyObject() {
-	Release();
+	if (decRef_)
+		Release();
 }
 
 void CPyObject::IncRef() {
@@ -28,6 +28,21 @@ void CPyObject::DecRef() {
 void CPyObject::Release() {
 	DecRef();
 	pyObject_ = NULL;
+}
+
+int CPyObject::Print(FILE * fp, int flags)
+{
+	return PyObject_Print(pyObject(), fp, flags);
+}
+
+int CPyObject::Print(int flags)
+{
+	return Print(stdout, flags);
+}
+
+int CPyObject::Print()
+{
+	return Print(stdout, 0);
 }
 
 bool CPyObject::IsSubclass(CPyObject * cls) {
@@ -92,19 +107,4 @@ PyObject* CPyObject::GetAttr(CPyObject* name) {
 
 PyObject* CPyObject::GetAttr(const char* name) {
 	return PyObject_GetAttrString(pyObject(), name);
-}
-
-template<>
-int CPyObject::To<int>() {
-	return (int) PyLong_AsLong(pyObject());
-}
-
-template<>
-char* CPyObject::To<char*>() {
-	return PyUnicode_AsUTF8(pyObject());
-}
-
-template<>
-const char* CPyObject::To<const char*>() {
-	return (const char*)To<char*>();
 }

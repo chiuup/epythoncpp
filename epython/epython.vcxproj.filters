@@ -42,6 +42,9 @@
     <ClCompile Include="cpython\cpyscope.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
+    <ClCompile Include="cpython\cpyconverter.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.py">
@@ -79,10 +82,10 @@
     <ClInclude Include="cpython\cpyscope.h">
       <Filter>cpython</Filter>
     </ClInclude>
-    <ClInclude Include="cpyconverter.h">
+    <ClInclude Include="cpython\typelist.h">
       <Filter>cpython</Filter>
     </ClInclude>
-    <ClInclude Include="typelist.h">
+    <ClInclude Include="cpython\cpyconverter.h">
       <Filter>cpython</Filter>
     </ClInclude>
   </ItemGroup>

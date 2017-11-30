@@ -5,11 +5,9 @@
 class CPyScope: public CPyObject {
 public:
 	CPyScope(PyObject* newScope) : CPyObject(newScope), previousScope_(currentScope_) {
-		IncRef();
 		currentScope_ = newScope;
 	}
 	CPyScope() : CPyObject(currentScope_ ? currentScope_ : Py_None), previousScope_(currentScope_) {
-		IncRef();
 	}
 
 	virtual ~CPyScope() {
