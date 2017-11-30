@@ -9,5 +9,18 @@ public:
 	CPyTuple(PyObject* p) : CPyObject(p) {}
 
 	void Set(unsigned int n, CPyObject* item);
-	PyObject* Get(unsigned int n);
+
+	template<typename T>
+	T Get(unsigned int n) {
+		CPyObject item;
+		item = Get<PyObject*>(n);
+		return item.To<T>();
+	}
+
+	template<>
+	PyObject * CPyTuple::Get<PyObject*>(unsigned int n)
+	{
+		PyObject* item = PyTuple_GetItem(pyObject(), n);
+		return item;
+	}
 };

@@ -79,5 +79,11 @@
     <ClInclude Include="cpython\cpyscope.h">
       <Filter>cpython</Filter>
     </ClInclude>
+    <ClInclude Include="cpyconverter.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="typelist.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

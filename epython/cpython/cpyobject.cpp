@@ -93,3 +93,18 @@ PyObject* CPyObject::GetAttr(CPyObject* name) {
 PyObject* CPyObject::GetAttr(const char* name) {
 	return PyObject_GetAttrString(pyObject(), name);
 }
+
+template<>
+int CPyObject::To<int>() {
+	return (int) PyLong_AsLong(pyObject());
+}
+
+template<>
+char* CPyObject::To<char*>() {
+	return PyUnicode_AsUTF8(pyObject());
+}
+
+template<>
+const char* CPyObject::To<const char*>() {
+	return (const char*)To<char*>();
+}

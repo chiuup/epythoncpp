@@ -32,4 +32,7 @@ public:
 
 	operator PyObject*();
 	operator bool();
+
+	template<typename T>
+	T To();
 };

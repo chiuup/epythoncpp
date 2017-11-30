@@ -37,8 +37,13 @@ int main()
 		assert(bar.IsSubclass(&foo));
 		assert(CPyObject(bar()).IsInstance(&foo));
 		CPyObject p(PyLong_FromLong(50));
+		CPyObject q(PyUnicode_FromString("my_string"));
 		CPyTuple tuple(10);
+		tuple.Set(0, &p);
+		tuple.Set(1, &q);
 		printf_s("Value = %ld\n", PyLong_AsLong(p));
+		printf_s("Value = %d\n", tuple.Get<int>(0));
+		printf_s("Value = %s\n", tuple.Get<const char*>(1));
 	}
 
 	_getch();
