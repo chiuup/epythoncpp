@@ -2,68 +2,68 @@
 #include <Python.h>
 #include "cpyconverter.h"
 
+struct CPyReferenceHolder {
+	PyObject* pyObject;
+	CPyReferenceHolder(PyObject* p) :pyObject(p) {}
+};
+struct CPyBorrowedReference :CPyReferenceHolder {
+	CPyBorrowedReference(PyObject* p) :CPyReferenceHolder(p) {}
+};
+struct CPyNewReference :CPyReferenceHolder {
+	CPyNewReference(PyObject* p) :CPyReferenceHolder(p) {}
+};
+
 class CPyObject
 {
-private:
-	CPyObject(const CPyObject&);
 protected:
 	const bool decRef_;
 	PyObject* pyObject_;
 public:
-	CPyObject(PyObject* p, bool decRef);
-	CPyObject() :CPyObject(NULL, true) {}
-	CPyObject(PyObject* p) :CPyObject(p, true) {}
-	virtual ~CPyObject();
+	CPyObject() :decRef_(true), pyObject_(NULL) {}
+	CPyObject(const CPyObject& p) :decRef_(true), pyObject_(p.pyObject()) { IncRef(); }
+	CPyObject(PyObject* p) :decRef_(true), pyObject_(p) {}
+	CPyObject(CPyBorrowedReference& p) :decRef_(true), pyObject_(p.pyObject) { IncRef(); }
+	CPyObject(CPyNewReference& p) :decRef_(true), pyObject_(p.pyObject) {}
 
-	PyObject* pyObject() const;
-	CPyObject* pyObject(PyObject* p);
+	virtual ~CPyObject() {
+		if (decRef_)
+			Release();
+	}
 
-	void IncRef();
-	void DecRef();
-	void Release();
-	int Print(FILE* fp, int flags);
-	int Print(int flags);
-	int Print();
+	void IncRef() { Py_XINCREF(pyObject_); }
+	void DecRef() { Py_XDECREF(pyObject_); }
 
-	bool IsSubclass(CPyObject* cls);
-	bool IsInstance(CPyObject* cls);
-	PyObject* GetAttr(CPyObject* name);
-	PyObject* GetAttr(const char* name);
+	void Release() { DecRef(); pyObject_ = NULL; }
+	int Print(FILE* fp, int flags) { return PyObject_Print(pyObject(), fp, flags); }
+	int Print(int flags) { return Print(stdout, flags); }
+	int Print() { return Print(stdout, 0); }
 
-	CPyObject* operator=(CPyObject* p);
-	CPyObject* operator=(PyObject* p);
-	PyObject* operator->();
+	bool IsSubclass(CPyObject& cls) { return PyObject_IsSubclass(pyObject(), cls.pyObject()); }
+	bool IsInstance(CPyObject& cls) { return PyObject_IsInstance(pyObject(), cls.pyObject()); }
+	PyObject* GetAttr(CPyObject& name) { return PyObject_GetAttr(pyObject(), name.pyObject()); }
+	PyObject* GetAttr(const char* name) { return PyObject_GetAttrString(pyObject(), name); }
+
+	PyObject* pyObject() const { return pyObject_; }
+	CPyObject& pyObject(PyObject* p) {
+		Release();
+		pyObject_ = p;
+		IncRef();
+		return *this;
+	}
+
+	CPyObject& operator=(CPyObject& p) { return pyObject(p.pyObject()); }
+	CPyObject& operator=(PyObject* p) { return pyObject(p); }
+	PyObject* operator->() { return pyObject_; }
 
 	PyObject* operator()(CPyObject* args, CPyObject* kwargs);
 	PyObject* operator()(CPyObject* args);
 	PyObject* operator()();
 
-	operator PyObject*();
-	operator bool();
+	operator PyObject*() { return pyObject_; }
+	operator bool() { return pyObject_ ? true : false; }
 
 	template<typename T>
 	T To() {
 		return CPyConverter<T>::Convert(pyObject());
 	}
-};
-
-class CPyBorrowedReference : public CPyObject
-{
-public:
-	CPyBorrowedReference() : CPyObject(NULL, false) {}
-	CPyBorrowedReference(PyObject* p) :CPyObject(p, false) {}
-	virtual ~CPyBorrowedReference() {}
-
-	void Release() { pyObject_ = NULL; }
-	CPyObject* pyObject(PyObject* p) { pyObject_ = p; return this; }
-};
-
-class CPyNewReference : public CPyObject
-{
-public:
-	CPyNewReference() : CPyObject(NULL, false) {}
-	CPyNewReference(PyObject* p) :CPyObject(p, false) {}
-	virtual ~CPyNewReference() { Release(); } // Have to call Release because base class won't do it
-
-	CPyObject* pyObject(PyObject* p) { pyObject_ = p; return this; }
 };

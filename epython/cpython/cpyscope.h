@@ -4,10 +4,10 @@
 
 class CPyScope: public CPyObject {
 public:
-	CPyScope(PyObject* newScope) : CPyObject(newScope), previousScope_(currentScope_) {
+	CPyScope(PyObject* newScope) : CPyObject(CPyBorrowedReference(newScope)), previousScope_(currentScope_) {
 		currentScope_ = newScope;
 	}
-	CPyScope() : CPyObject(currentScope_ ? currentScope_ : Py_None), previousScope_(currentScope_) {
+	CPyScope() : CPyObject(CPyBorrowedReference(currentScope_ ? currentScope_ : Py_None)), previousScope_(currentScope_) {
 	}
 
 	virtual ~CPyScope() {
