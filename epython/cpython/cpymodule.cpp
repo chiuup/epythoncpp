@@ -9,7 +9,7 @@ PyObject* CPyInitModule(PyModuleDef * moduleDef, void(*initFunc)()) {
 	return m;
 }
 
-void _CPyModuleDef(const char* name, PyCFunction func, PyMethodDef* methodDef) {
+void _CPyModuleDef(const char* name, PyMethodDef* methodDef) {
 	CPyScope current;
 	int rc = PyModule_AddFunctions(current.pyObject(), methodDef);
 	assert(rc == 0);

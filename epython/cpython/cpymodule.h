@@ -37,7 +37,7 @@ _CPYMODULE_INIT(name)
 	assert(rc != -1); \
 }
 
-void _CPyModuleDef(const char* name, PyCFunction func, PyMethodDef* methodDef);
+void _CPyModuleDef(const char* name, PyMethodDef* methodDef);
 
 #define CPYMODULE_DEF_4(name, func, flags, doc) \
 do { \
@@ -45,27 +45,45 @@ do { \
 		{ name, func, flags, doc }, \
 		{ 0, 0, 0, 0 } \
 	}; \
-	_CPyModuleDef(name, (PyCFunction)func, CAT(methodDef_, func)); \
+	_CPyModuleDef(name, CAT(methodDef_, func)); \
 } while(0)
 #define CPYMODULE_DEF_3(name, func, flags) CPYMODULE_DEF_4(name, func, METH_VARARGS, 0)
 #define CPYMODULE_DEF_2(name, func) CPYMODULE_DEF_3(name, func, METH_VARARGS)
 #define CPYMODULE_DEF(...) VA_SELECT(CPYMODULE_DEF, __VA_ARGS__)
 
 template<PyCFunction func>
-void CPyModuleDef(const char* name, int flags, const char* doc) {
+void CPyModuleDef(const char* name, const char* doc, int flags) {
 	static PyMethodDef methodDef[] = {
 		{ name, func, flags, doc },
 		{ 0, 0, 0, 0 }
 	};
-	_CPyModuleDef(name, func, methodDef);
+	_CPyModuleDef(name, methodDef);
 }
 
 template<PyCFunction func>
-void CPyModuleDef(const char* name, int flags) {
-	return CPyModuleDef<func>(name, flags, 0);
+void CPyModuleDef(const char* name, const char* doc) {
+	return CPyModuleDef<func>(name, doc, METH_VARARGS);
 }
 
 template<PyCFunction func>
 void CPyModuleDef(const char* name) {
-	return CPyModuleDef<func>(name, METH_VARARGS, 0);
+	return CPyModuleDef<func>(name, 0, METH_VARARGS);
+}
+
+template<void* F, typename R, typename T1, typename T2>
+void CPyModuleDef(const char* name) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1, T2>, METH_VARARGS, 0},
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R, typename T1>
+void CPyModuleDef(const char* name) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1>, METH_VARARGS, 0 },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
 }

@@ -64,6 +64,6 @@ public:
 
 	template<typename T>
 	T To() {
-		return CPyConverter<T>::Convert(pyObject());
+		return CPyConverter<T>::ConvertFromPyObject(pyObject());
 	}
 };
