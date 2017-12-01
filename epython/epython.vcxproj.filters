@@ -42,6 +42,9 @@
     <ClCompile Include="cpython\cpyscope.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
+    <ClCompile Include="cpython\cpyfunction.cpp">
+      <Filter>cpython</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.py">

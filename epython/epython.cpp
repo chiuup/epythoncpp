@@ -41,7 +41,7 @@ CPYMODULE_INIT(ryan_engine) {
 	CPyModuleDef<minus, int, int, int>("minus");
 	CPyModuleDef<square, int, int>("square");
 	CPyModuleDef<echo, const char*, const char*>("echo");
-	// CPyModuleDef<no_ret, void, int>("no_ret");
+	CPyModuleDef<no_ret, void, int>("no_ret");
 }
 
 int main()

@@ -28,5 +28,6 @@ else:
     print("minus:%s"%ryan_engine.minus(2,3))
     print("square:%s"%ryan_engine.square(2))
     print ("echo:%s"%ryan_engine.echo("echo memememe"))
+    print ("no_ret:%s"%ryan_engine.no_ret(33))
 print("Foo loaded")
 bar = Foo

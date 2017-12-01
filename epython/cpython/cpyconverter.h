@@ -62,16 +62,16 @@ struct CPyConverter
 
 		return ConverterFromPyObjectImpl<R, converterImpl>()(from);
 	}
-	
+
 	template<typename R, int v>
 	struct ConvertToPyObjectImpl {
 		PyObject* operator()(R from) {
 			return (R)obj;
 		}
 	};
-	
+
 	template<typename R>
-	struct ConvertToPyObjectImpl<R, CPyObjectCast>{
+	struct ConvertToPyObjectImpl<R, CPyObjectCast> {
 		PyObject* operator()(R from) {
 			return static_cast<CPyObject*>(from)->pyObject();
 		}
@@ -113,7 +113,7 @@ struct CPyConverter
 			return PyUnicode_FromString((const char*)from);
 		}
 	};
-
+	enum { HasReturnValue = IndexOf<VoidTypeList, R>::value >= 0 ? false : true };
 	static PyObject* ConvertToPyObject(R from) {
 		enum {
 			converterImpl = IndexOf<SignedIntTypelist, R>::value >= 0 ? SignedInt :

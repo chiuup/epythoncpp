@@ -165,6 +165,7 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cpython\cpydict.cpp" />
+    <ClCompile Include="cpython\cpyfunction.cpp" />
     <ClCompile Include="cpython\cpyinterpreter.cpp" />
     <ClCompile Include="cpython\cpymodule.cpp" />
     <ClCompile Include="cpython\cpyobject.cpp" />

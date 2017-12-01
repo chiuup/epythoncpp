@@ -46,4 +46,5 @@ namespace TL {
 	typedef TYPELIST(float, double, long double) FloatTypelist;
 	typedef TYPELIST(bool) BoolTypeList;
 	typedef TYPELIST(const char*, char*) StringTypeList;
+	typedef TYPELIST(void) VoidTypeList;
 }

@@ -70,10 +70,24 @@ void CPyModuleDef(const char* name) {
 	return CPyModuleDef<func>(name, 0, METH_VARARGS);
 }
 
-template<void* F, typename R, typename T1, typename T2>
-void CPyModuleDef(const char* name) {
+template<void* F, typename R>
+void CPyModuleDef(const char* name, const char* doc) {
 	static PyMethodDef methodDef[] = {
-		{ name, CPyFunction<F, R, T1, T2>, METH_VARARGS, 0},
+		{ name, CPyFunction<F, R>, METH_VARARGS, doc },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R>(name, 0);
+}
+
+template<void* F, typename R, typename T1>
+void CPyModuleDef(const char* name, const char* doc) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1>, METH_VARARGS, doc },
 		{ 0, 0, 0, 0 }
 	};
 	_CPyModuleDef(name, methodDef);
@@ -81,9 +95,76 @@ void CPyModuleDef(const char* name) {
 
 template<void* F, typename R, typename T1>
 void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1>(name, 0);
+}
+
+template<void* F, typename R, typename T1, typename T2>
+void CPyModuleDef(const char* name, const char* doc) {
 	static PyMethodDef methodDef[] = {
-		{ name, CPyFunction<F, R, T1>, METH_VARARGS, 0 },
+		{ name, CPyFunction<F, R, T1, T2>, METH_VARARGS, doc},
 		{ 0, 0, 0, 0 }
 	};
 	_CPyModuleDef(name, methodDef);
 }
+
+template<void* F, typename R, typename T1, typename T2>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1, T2>(name, 0);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3>
+void CPyModuleDef(const char* name, const char* doc) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1, T2, T3>, METH_VARARGS, doc },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1, T2, T3>(name, 0);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4>
+void CPyModuleDef(const char* name, const char* doc) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1, T2, T3, T4>, METH_VARARGS, doc },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1, T2, T3, T4>(name, 0);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4, typename T5>
+void CPyModuleDef(const char* name, const char* doc) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1, T2, T3, T4, T5>, METH_VARARGS, doc },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4, typename T5>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1, T2, T3, T4, T5>(name, 0);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
+void CPyModuleDef(const char* name, const char* doc) {
+	static PyMethodDef methodDef[] = {
+		{ name, CPyFunction<F, R, T1, T2, T3, T4, T5, T6>, METH_VARARGS, doc },
+		{ 0, 0, 0, 0 }
+	};
+	_CPyModuleDef(name, methodDef);
+}
+
+template<void* F, typename R, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
+void CPyModuleDef(const char* name) {
+	return CPyModuleDef<F, R, T1, T2, T3, T4, T5, T6>(name, 0);
+}
+
