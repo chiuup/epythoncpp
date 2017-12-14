@@ -51,9 +51,14 @@ namespace CPython {
 		inline Object& operator=(PyObject* p) { return pyObject(p); }
 		inline PyObject* operator->() { return pyObject_; }
 
-		Object operator()(void);
-		Object operator()(Object* args);
-		Object operator()(Object* args, Object* kwargs);
+		Object operator()();
+		inline Object operator()(Object* args) { return operator()(args, NULL); }
+		inline Object operator()(Object* args, Object* kwargs) {
+			PyObject* result = PyObject_Call(pyObject(), args->pyObject(), kwargs ? kwargs->pyObject() : NULL);
+			assert(result != NULL);
+			return Object(NewReference(result));
+		}
+
 
 		inline operator PyObject*() const { return pyObject_; }
 		inline operator bool() const { return pyObject_ ? true : false; }

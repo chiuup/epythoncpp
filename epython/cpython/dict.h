@@ -13,8 +13,14 @@ namespace CPython {
 
 		void Set(Object& key, Object& value);
 		void Set(const char* key, Object& value);
-		inline Object Get(const Object& key);
-		inline Object Get(const char* key);
+		inline Object Get(const Object& key)
+		{
+			return Object(BorrowedReference(PyDict_GetItem(pyObject(), key.pyObject())));
+		}
+		inline Object Get(const char* key)
+		{
+			return Object(BorrowedReference(PyDict_GetItemString(pyObject(), key)));
+		}
 		bool Contains(const Object& key);
 		bool Contains(const char* key);
 	};
