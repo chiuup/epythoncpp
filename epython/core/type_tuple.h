@@ -3,6 +3,12 @@ namespace Core {
 	struct NullTupleElement {};
 	struct EmptyType {};
 
+	namespace Private {
+		template<class TTuple, class T> struct IndexOfHelper;
+		template <class TTuple, unsigned int index> struct TypeAtHelper;
+		template <class TTuple, unsigned int index, typename DefaultType> struct TypeAtNonStrictHelper;
+	}
+
 	template<class T, class U>
 	struct TypeTupleElement
 	{

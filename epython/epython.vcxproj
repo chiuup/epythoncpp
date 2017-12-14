@@ -27,6 +27,7 @@
     <ClInclude Include="cpython\cpython.h" />
     <ClInclude Include="cpython\dict.h" />
     <ClInclude Include="cpython\environment.h" />
+    <ClInclude Include="cpython\function.h" />
     <ClInclude Include="cpython\interpreter.h" />
     <ClInclude Include="cpython\module.h" />
     <ClInclude Include="cpython\object.h" />

@@ -21,44 +21,43 @@ namespace Core {
 			typedef typename Args::template ArgTypeAtNonStrict<7>::Type ArgType7;
 			typedef typename Args::template ArgTypeAtNonStrict<8>::Type ArgType8;
 
-			MemberFunctionInvoker(ObjectType* obj, F func) :obj_(obj), func_(func) {};
+			MemberFunctionInvoker(F func) :func_(func) {};
 
-			ResultType operator()() {
-				return (obj_->*func_)();
+			ResultType operator()(ObjectType* obj) {
+				return (obj->*func_)();
 			}
-			ResultType operator()(ArgType0 a0) {
-				return (obj_->*func_)(a0);
+			ResultType operator()(ObjectType* obj, ArgType0 a0) {
+				return (obj->*func_)(a0);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1) {
-				return (obj_->*func_)(a0, a1);
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1) {
+				return (obj->*func_)(a0, a1);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2) {
-				return (obj_->*func_)(a0, a1, a2);
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2) {
+				return (obj->*func_)(a0, a1, a2);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3) {
-				return (obj_->*func_)(a0, a1, a2, a3);
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3) {
+				return (obj->*func_)(a0, a1, a2, a3);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4) {
-				return (obj_->*func_)(a0, a1, a2, a3, a4);
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4) {
+				return (obj->*func_)(a0, a1, a2, a3, a4);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
 				ArgType5 a5) {
-				return (obj_->*func_)(a0, a1, a2, a3, a4, a5);
+				return (obj->*func_)(a0, a1, a2, a3, a4, a5);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
 				ArgType5 a5, ArgType6 a6) {
-				return (obj_->*func_)(a0, a1, a2, a3, a4, a5, a6);
+				return (obj->*func_)(a0, a1, a2, a3, a4, a5, a6);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
 				ArgType5 a5, ArgType6 a6, ArgType7 a7) {
-				return (obj_->*func_)(a0, a1, a2, a3, a4, a5, a6, a7);
+				return (obj->*func_)(a0, a1, a2, a3, a4, a5, a6, a7);
 			}
-			ResultType operator()(ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
+			ResultType operator()(ObjectType* obj, ArgType0 a0, ArgType1 a1, ArgType2 a2, ArgType3 a3, ArgType4 a4,
 				ArgType5 a5, ArgType6 a6, ArgType7 a7, ArgType8 a8) {
-				return (obj_->*func_)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+				return (obj->*func_)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 			}
 		private:
-			ObjectType * obj_;
 			F func_;
 		};
 
@@ -147,7 +146,6 @@ namespace Core {
 		typedef typename InvokerType::ArgType7 ArgType7;
 		typedef typename InvokerType::ArgType8 ArgType8;
 	public:
-		Functor(ObjectType* obj, F func) :invoker_(obj, func) {};
 		Functor(F func) :invoker_(func) {};
 		virtual ~Functor() {};
 		ResultType operator()() {
