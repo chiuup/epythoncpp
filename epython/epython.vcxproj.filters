@@ -15,6 +15,7 @@
     <ClInclude Include="cpython\module.h" />
     <ClInclude Include="cpython\scope.h" />
     <ClInclude Include="cpython\function.h" />
+    <ClInclude Include="cpython\gil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpython\environment.cpp" />
