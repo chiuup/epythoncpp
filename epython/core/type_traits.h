@@ -8,7 +8,7 @@ namespace Core {
 	{
 		typedef T ValueType;
 		typedef ConstantType<T, val> Type;
-		static const T Value = val;
+		static const T value = val;
 	};
 
 	typedef ConstantType<bool, true> TrueType;
@@ -47,7 +47,7 @@ namespace Core {
 
 
 	template<class T = void> struct IsInteger :
-		public If<IsSigned<T>::Value || IsUnsigned<T>::Value || IsChar<T>::Value, TrueType, FalseType>::Type {};
+		public If<IsSigned<T>::value || IsUnsigned<T>::value || IsChar<T>::value, TrueType, FalseType>::Type {};
 
 	template<class T = void> struct IsFloat :public FalseType {};
 	template<> struct IsFloat<float> :public TrueType {};
@@ -58,7 +58,7 @@ namespace Core {
 	template<class T> struct IsFloat<const volatile T> :public IsFloat<T> {};
 
 	template<class T = void> struct IsArithmetic :
-		public If<IsInteger<T>::Value || IsFloat<T>::Value, TrueType, FalseType>::Type {};
+		public If<IsInteger<T>::value || IsFloat<T>::value, TrueType, FalseType>::Type {};
 
 	template<class T> struct IsPointer : public FalseType {};
 	template<class T> struct IsPointer<T*> : public TrueType {};
@@ -75,7 +75,7 @@ namespace Core {
 	struct VoidArgType {};
 
 	template<class T> struct IsArgType :
-		public If<IsArithmetic<T>::Value || IsPointer<T>::Value || IsReference<T>::Value || IsVoid<T>::Value || IsSame<VoidArgType, T>::Value, TrueType, FalseType>::Type {};
+		public If<IsArithmetic<T>::value || IsPointer<T>::value || IsReference<T>::value || IsVoid<T>::value || IsSame<VoidArgType, T>::value, TrueType, FalseType>::Type {};
 
 	template<class T> struct IsMemberFunctionPointer : public FalseType {};
 	template<class T0, class T1> struct IsMemberFunctionPointer<T0 T1::*> : public TrueType {};
@@ -105,7 +105,7 @@ namespace Core {
 
 	template<bool, class T = void> struct EnableIf {};
 	template<class T> struct EnableIf<true, T> { typedef T Type; };
-	template<class T> struct EnableIfIsArgType : public EnableIf<IsArgType<T>::Value, T> {};
+	template<class T> struct EnableIfIsArgType : public EnableIf<IsArgType<T>::value, T> {};
 
 	template<bool, class T0, class T1> struct If { typedef T0 Type; };
 	template<class T0, class T1> struct If<false, T0, T1> { typedef T1 Type; };

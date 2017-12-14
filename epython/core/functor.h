@@ -1,6 +1,7 @@
 #pragma once
 #include "signature.h"
-#include "typetraits.h"
+#include "type_traits.h"
+
 namespace Core {
 	namespace Private {
 		template<typename F>
@@ -121,7 +122,7 @@ namespace Core {
 		template<typename F>
 		struct FunctorInvokerSelect
 		{
-			typedef typename If<IsMemberFunctionPointer<F>::Value,
+			typedef typename If<IsMemberFunctionPointer<F>::value,
 				MemberFunctionInvoker<F>,
 				FunctionInvoker<F>
 			>::Type InvokerType;
@@ -148,7 +149,7 @@ namespace Core {
 	public:
 		Functor(ObjectType* obj, F func) :invoker_(obj, func) {};
 		Functor(F func) :invoker_(func) {};
-		virtual ~Functor() { printf("deleted\n"); };
+		virtual ~Functor() {};
 		ResultType operator()() {
 			return invoker_();
 		}

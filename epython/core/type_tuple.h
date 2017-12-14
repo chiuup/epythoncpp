@@ -13,20 +13,20 @@ namespace Core {
 	namespace Private {
 		template<class T>
 		struct IndexOfHelper<NullTupleElement, T> {
-			static const int Value = -1;
+			static const int value = -1;
 		};
 
 		template<class T, class Tail>
 		struct IndexOfHelper<TypeTupleElement<T, Tail>, T> {
-			static const int Value = 0;
+			static const int value = 0;
 		};
 
 		template<class Head, class Tail, class T>
 		struct IndexOfHelper<TypeTupleElement<Head, Tail>, T> {
 		private:
-			static const int temp = IndexOfHelper<Tail, T>::Value;
+			static const int temp = IndexOfHelper<Tail, T>::value;
 		public:
-			static const int Value = temp == -1 ? -1 : 1 + temp;
+			static const int value = temp == -1 ? -1 : 1 + temp;
 		};
 
 
@@ -76,7 +76,7 @@ namespace Core {
 
 		template<class T>
 		struct IndexOf {
-			static const int Value = Private::IndexOfHelper<Result, T>::Value;
+			static const int value = Private::IndexOfHelper<Result, T>::value;
 		};
 
 		template<unsigned int i>

@@ -1,7 +1,7 @@
 #pragma once
 // Hurts my brain to read this code
-#include "typetuple.h"
-#include "typetraits.h"
+#include "type_tuple.h"
+#include "type_traits.h"
 namespace Core {
 	template<
 		typename T
