@@ -2,8 +2,12 @@
 #include <conio.h>
 #include "cpython\cpython.h"
 
+CPYTHON_MODULE_INIT(ryan_engine) {
+}
+
 int main() 
 {
+	CPYTHON_MODULE_IMPORT(ryan_engine);
 	CPython::Interpreter interpreter;
 
 	{

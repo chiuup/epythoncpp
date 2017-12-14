@@ -7,8 +7,6 @@ namespace CPython {
 		struct ReferenceHolder {
 			PyObject* pyObject;
 			inline ReferenceHolder(PyObject* p) :pyObject(p) {}
-
-			inline operator PyObject*() { return pyObject; }
 		};
 	}
 	struct BorrowedReference :Private::ReferenceHolder {
@@ -26,8 +24,8 @@ namespace CPython {
 		inline Object() :decRef_(true), pyObject_(NULL) {}
 		inline Object(const Object& p) : decRef_(true), pyObject_(p.pyObject()) { IncRef(); }
 		inline Object(PyObject* p) : decRef_(true), pyObject_(p) {}
-		inline Object(BorrowedReference& p) : decRef_(true), pyObject_(p) { IncRef(); }
-		inline Object(NewReference& p) : decRef_(true), pyObject_(p) {}
+		inline Object(BorrowedReference& p) : decRef_(true), pyObject_(p.pyObject) { IncRef(); }
+		inline Object(NewReference& p) : decRef_(true), pyObject_(p.pyObject) {}
 
 		virtual ~Object() { if (decRef_) DecRef(); }
 

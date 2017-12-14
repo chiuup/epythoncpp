@@ -5,3 +5,4 @@
 #include "object.h"
 #include "dict.h"
 #include "tuple.h"
+#include "module.h"

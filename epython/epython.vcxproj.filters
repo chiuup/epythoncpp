@@ -12,6 +12,8 @@
     <ClInclude Include="cpython\tuple.h" />
     <ClInclude Include="cpython\dict.h" />
     <ClInclude Include="core\preprocessor.h" />
+    <ClInclude Include="cpython\module.h" />
+    <ClInclude Include="cpython\scope.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpython\environment.cpp" />
@@ -20,5 +22,7 @@
     <ClCompile Include="cpython\object.cpp" />
     <ClCompile Include="cpython\tuple.cpp" />
     <ClCompile Include="cpython\dict.cpp" />
+    <ClCompile Include="cpython\scope.cpp" />
+    <ClCompile Include="cpython\module.cpp" />
   </ItemGroup>
 </Project>
