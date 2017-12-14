@@ -1,26 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="cpython">
       <UniqueIdentifier>{9bf2eb64-31f7-450c-b266-976ec10fa6dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{4f9140cf-f8dc-46bc-aebd-141fdaa3360e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{6c892490-a507-4812-a0ce-18b991102b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts\foo">
+      <UniqueIdentifier>{e64bfd17-7a4a-4eee-89e9-6ab8fee99403}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="epython.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cpython\cpython.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
@@ -42,14 +36,10 @@
     <ClCompile Include="cpython\cpyscope.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
-    <ClCompile Include="cpython\cpyfunction.cpp">
+    <ClCompile Include="cpython\cpyfunc.cpp">
       <Filter>cpython</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="test.py">
-      <Filter>Source Files</Filter>
-    </None>
+    <ClCompile Include="epython.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpython\cpython.h">
@@ -73,20 +63,49 @@
     <ClInclude Include="cpython\cpymodule.h">
       <Filter>cpython</Filter>
     </ClInclude>
-    <ClInclude Include="cpython\preprocessor.h">
-      <Filter>cpython</Filter>
-    </ClInclude>
     <ClInclude Include="cpython\cpyfunction.h">
       <Filter>cpython</Filter>
     </ClInclude>
     <ClInclude Include="cpython\cpyscope.h">
       <Filter>cpython</Filter>
     </ClInclude>
-    <ClInclude Include="cpython\typelist.h">
-      <Filter>cpython</Filter>
-    </ClInclude>
     <ClInclude Include="cpython\cpyconverter.h">
       <Filter>cpython</Filter>
     </ClInclude>
+    <ClInclude Include="cpython\cpyclass.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\cpyfunc.h">
+      <Filter>cpython</Filter>
+    </ClInclude>
+    <ClInclude Include="core\functor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\signature.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\typetraits.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\typetuple.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="cpython\preprocessor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scripts\__init__.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\printer.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\stuff\__init__.py">
+      <Filter>scripts\foo</Filter>
+    </None>
+    <None Include="scripts\stuff\foo.py">
+      <Filter>scripts\foo</Filter>
+    </None>
   </ItemGroup>
 </Project>

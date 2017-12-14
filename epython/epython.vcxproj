@@ -165,7 +165,7 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cpython\cpydict.cpp" />
-    <ClCompile Include="cpython\cpyfunction.cpp" />
+    <ClCompile Include="cpython\cpyfunc.cpp" />
     <ClCompile Include="cpython\cpyinterpreter.cpp" />
     <ClCompile Include="cpython\cpymodule.cpp" />
     <ClCompile Include="cpython\cpyobject.cpp" />
@@ -175,11 +175,20 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     <ClCompile Include="epython.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.py" />
+    <None Include="scripts\printer.py" />
+    <None Include="scripts\stuff\foo.py" />
+    <None Include="scripts\stuff\__init__.py" />
+    <None Include="scripts\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\functor.h" />
+    <ClInclude Include="core\signature.h" />
+    <ClInclude Include="core\typetraits.h" />
+    <ClInclude Include="core\typetuple.h" />
+    <ClInclude Include="cpython\cpyclass.h" />
     <ClInclude Include="cpython\cpyconverter.h" />
     <ClInclude Include="cpython\cpydict.h" />
+    <ClInclude Include="cpython\cpyfunc.h" />
     <ClInclude Include="cpython\cpyfunction.h" />
     <ClInclude Include="cpython\cpygil.h" />
     <ClInclude Include="cpython\cpyinterpreter.h" />
@@ -189,7 +198,6 @@ xcopy /Y /S /I /D $(ProjectDir)scripts $(TargetDir)scripts</Command>
     <ClInclude Include="cpython\cpython.h" />
     <ClInclude Include="cpython\cpytuple.h" />
     <ClInclude Include="cpython\preprocessor.h" />
-    <ClInclude Include="cpython\typelist.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

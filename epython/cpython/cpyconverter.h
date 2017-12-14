@@ -1,7 +1,6 @@
 #pragma once
 #include <Python.h>
 #include "typelist.h"
-using namespace TL;
 
 enum CPyConverterSelector { SignedInt, UnsignedInt, Float, Bool, String, CPyObjectCast };
 template<typename R>
