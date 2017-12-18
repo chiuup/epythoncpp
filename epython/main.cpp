@@ -1,11 +1,11 @@
-#include <stdio.h>
+#include <stdio.h>CPython::FunctionDef("plus", plus, 0);
 #include <conio.h>
 #include "cpython\cpython.h"
 #include "core\functor.h"
 
 #include "cpython\function.h"
 int plus(int a, int b) {
-	printf("%d\n", a + b);
+	// printf("%d\n", a + b);
 	return a + b;
 }
 int minus(int a, int b) {
@@ -68,14 +68,14 @@ int main()
 		CPython::InterpreterLock lock(&interpreter);
 		CPython::Function* func = CPython::MakeFunction(hello);
 
-		//CPython::Tuple plus_arg_tuple(2);
-		//plus_arg_tuple.Set(0, CPython::Object::From<int>(100));
-		//plus_arg_tuple.Set(1, CPython::Object::From<int>(200));
-		//PyObject* plus_ret = func->operator()(NULL, CPython::Tuple(), NULL);
+		CPython::Tuple plus_arg_tuple(2);
+		plus_arg_tuple.Set(0, CPython::Object::From<int>(100));
+		plus_arg_tuple.Set(1, CPython::Object::From<int>(200));
+		PyObject* plus_ret = func->operator()(NULL, CPython::Tuple(), NULL);
 
-		//CPython::Object plus_ret_obj = CPython::Object(CPython::NewReference(plus_ret));
-		//printf("%d\n", plus_ret_obj.To<int>());
-		delete func;
+		CPython::Object plus_ret_obj = CPython::Object(CPython::NewReference(plus_ret));
+		printf("%d\n", plus_ret_obj.To<int>());
+		Py_DECREF((PyObject*)func);
 		printf("=================================================\n");
 	}
 
