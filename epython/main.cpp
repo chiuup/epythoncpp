@@ -27,8 +27,8 @@ void test()
 }
 
 CPYTHON_MODULE_INIT(ryan_engine) {
-	CPython::FunctionDef("plus", plus, 0);
-	CPython::FunctionDef("minus", minus, 0);
+	CPython::FunctionDef("plus", plus);
+	CPython::FunctionDef("minus", minus);
 }
 
 int main()
@@ -42,13 +42,15 @@ int main()
 		if (!fooMod) {
 			PyErr_Print();
 		}
-		printf("=================================================\n");
+		else {
+			printf("=================================================\n");
 
-		CPython::Object bar = fooMod.GetAttr("bar"), foo = fooMod.GetAttr("Foo");
+			CPython::Object bar = fooMod.GetAttr("bar"), foo = fooMod.GetAttr("Foo");
 
-		assert(bar.pyObject() != NULL);
-		assert(bar.IsSubclass(foo));
-		assert(bar().IsInstance(foo));
+			assert(bar.pyObject() != NULL);
+			assert(bar.IsSubclass(foo));
+			assert(bar().IsInstance(foo));
+		}
 		printf("=================================================\n");
 		auto intobj = CPython::Object::From(1);
 		printf("%d\n", intobj.To<int>());

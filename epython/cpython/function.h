@@ -1,6 +1,7 @@
 #pragma once
 #include <Python.h>
 #include "core\signature.h"
+#include "dict.h"
 
 namespace CPython {
 	namespace Private {
@@ -298,11 +299,37 @@ namespace CPython {
 			delete invoker_; 
 		}
 
-		PyObject* operator()(PyObject* self, PyObject* args, PyObject* kwargs) {
+		inline PyObject* operator()(PyObject* self, PyObject* args, PyObject* kwargs) {
 			return invoker_->operator()(self, args, kwargs);
+		}
+
+		inline void AddToModule(const Object& module, const char* name, const char* doc) {
+			assert(name != NULL);
+			name_ = Object::From<const char*>(name);
+			if (doc) doc_ = Object::From<const char*>(doc);
+			else doc_ = Object::From<const char*>("");
+			module_ = Object(module);
+
+			Dict moduleDict = module_.GetAttr("__dict__");
+			moduleDict.Set(name_, Object(BorrowedReference(this)));
+		}
+
+		inline const Object& doc() const {
+			return doc_;
+		}
+
+		inline const Object& name() const {
+			return name_;
+		}
+
+		inline const Object& module() const {
+			return module_;
 		}
 	private:
 		Private::FunctionInvokerBase* invoker_;
+		Object name_;
+		Object module_;
+		Object doc_;
 	};
 
 	template<typename F>

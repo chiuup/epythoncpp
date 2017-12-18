@@ -11,10 +11,14 @@ namespace CPython {
 
 	template<typename F>
 	void FunctionDef(const char* name, F func, const char* doc) {
-		Object funcObject = Object(NewReference((PyObject*)MakeFunction(func)));
+		Function* funcObj = MakeFunction(func);
 		Private::Scope current;
-		Dict moduleDict = Dict(current.GetAttr("__dict__"));
-		moduleDict.Set(name, funcObject);
+		funcObj->AddToModule(current, name, doc);
+	}
+
+	template<typename F>
+	void FunctionDef(const char* name, F func) {
+		FunctionDef(name, func, 0);
 	}
 }
 

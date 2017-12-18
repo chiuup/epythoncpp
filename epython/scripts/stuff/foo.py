@@ -25,9 +25,12 @@ else:
     #print(barz.__name__)
     #print(Foo.ok.__name__)
     #print(Foo().ok.__name__)
-
     print("plus:%s"%ryan_engine.plus(2,3))
     print("minus:%s"%ryan_engine.minus(2,3))
+    print(ryan_engine.plus.__module__)
+    print(ryan_engine.plus.__name__)
+    print(ryan_engine.plus.__doc__)
+    print(ryan_engine.plus.__class__)
     #print("square:%s"%ryan_engine.square(2))
     #print ("echo:%s"%ryan_engine.echo("echo memememe"))
     #print ("no_ret:%s"%ryan_engine.no_ret(33))

@@ -8,6 +8,22 @@ namespace CPython {
 	// Stolen from Python's funcobject.c
 	static PyObject* FunctionDescrGet(PyObject *func, PyObject *obj, PyObject *type_);
 
+	static PyObject* FunctionGetName(PyObject* obj, void *);
+	static PyObject* FunctionGetModule(PyObject* obj, void *);
+	static PyObject* FunctionGetClass(PyObject* obj, void *);
+	static PyObject* FunctionGetDoc(PyObject* obj, void *);
+
+	static PyGetSetDef FunctionGetSetList[] = {
+		{ "__name__", (getter)FunctionGetName, 0, 0, 0 },
+		{ "func_name", (getter)FunctionGetName, 0, 0, 0 },
+		{ "__module__", (getter)FunctionGetModule, 0, 0, 0 },
+		{ "func_module", (getter)FunctionGetModule, 0, 0, 0 },
+		{ "__class__", (getter)FunctionGetClass, 0, 0, 0 },    // see note above
+		{ "__doc__", (getter)FunctionGetDoc, 0, 0, 0 },
+		{ "func_doc", (getter)FunctionGetDoc, 0, 0, 0 },
+		{ NULL, 0, 0, 0, 0 } /* Sentinel */
+	};
+
 	PyTypeObject FunctionType = {
 		PyVarObject_HEAD_INIT(NULL, 0)
 		const_cast<char*>("cpython.function"),
@@ -38,7 +54,7 @@ namespace CPython {
 		0,                                  /* tp_iternext */
 		0,                                  /* tp_methods */
 		0, // func_memberlist,              /* tp_members */
-		0, //function_getsetlist,                /* tp_getset */
+		FunctionGetSetList,                /* tp_getset */
 		0,                                  /* tp_base */
 		0,                                  /* tp_dict */
 		FunctionDescrGet,                 /* tp_descr_get */
@@ -77,6 +93,33 @@ namespace CPython {
 		}
 		return PyMethod_New(func, obj);
 	}
+	PyObject * FunctionGetName(PyObject * obj, void *)
+	{
+		Function* func = (Function*)obj;
+		PyObject* result = func->name().pyObject();
+		Py_XINCREF(result);
+		return result;
+	}
+	PyObject * FunctionGetModule(PyObject * obj, void *)
+	{
+		Function* func = (Function*)obj;
+		PyObject* result = func->module().pyObject();
+		Py_XINCREF(result);
+		return result;
+	}
+	PyObject * FunctionGetClass(PyObject * obj, void *)
+	{
+		PyObject* result = (PyObject*)&PyCFunction_Type;
+		Py_XINCREF(result);
+		return result;
+	}
+	PyObject * FunctionGetDoc(PyObject * obj, void *)
+	{
+		Function* func = (Function*)obj;
+		PyObject* result = func->doc().pyObject();
+		Py_XINCREF(result);
+		return result;
+	}
 	Function::Function(Private::FunctionInvokerBase * invoker) : invoker_(invoker)
 	{
 		PyObject* p = this;
@@ -88,6 +131,6 @@ namespace CPython {
 
 		(void)(     // warning suppression for GCC
 			PyObject_INIT(p, &FunctionType)
-		);
+			);
 	}
 }
