@@ -16,6 +16,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<VoidArgType> Args;
+		static const unsigned int arity = 0;
 	};
 
 	template<
@@ -26,6 +27,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 
@@ -37,6 +39,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 
@@ -48,6 +51,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -58,6 +62,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -68,6 +73,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -78,6 +84,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -88,6 +95,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -99,6 +107,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
@@ -109,6 +118,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6, A7> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<typename R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
@@ -119,6 +129,7 @@ namespace Core {
 		typedef NullTupleElement* ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -129,6 +140,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<NullTupleElement> Args;
+		static const unsigned int arity = 0;
 	};
 
 
@@ -140,6 +152,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 
@@ -151,6 +164,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -161,6 +175,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -171,6 +186,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -181,6 +197,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -192,6 +209,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -203,6 +221,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -214,6 +233,7 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6, A7> Args;
+		static const unsigned int arity = Args::length;
 	};
 
 	template<
@@ -225,5 +245,12 @@ namespace Core {
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
 		typedef typename TypeTuple<A0, A1, A2, A3, A4, A5, A6, A7, A8> Args;
+		static const unsigned int arity = Args::length;
 	};
+
+
+	template<typename F>
+	inline Signature<F> GetSignature(F func) {
+		return Signature<F>();
+	}
 }

@@ -7,6 +7,7 @@ namespace Core {
 		template<class TTuple, class T> struct IndexOfHelper;
 		template <class TTuple, unsigned int index> struct TypeAtHelper;
 		template <class TTuple, unsigned int index, typename DefaultType> struct TypeAtNonStrictHelper;
+		template <class TTuple> struct LengthHelper;
 	}
 
 	template<class T, class U>
@@ -66,6 +67,18 @@ namespace Core {
 			typedef typename
 				TypeAtNonStrictHelper<Tail, i - 1, DefaultType>::Type Type;
 		};
+
+		template<> 
+		struct LengthHelper<NullTupleElement> 
+		{
+			static const unsigned int value = 0;
+		};
+
+		template<class T, class U>
+		struct LengthHelper< TypeTupleElement<T, U> > 
+		{
+			static const unsigned int value = LengthHelper<U>::value + 1;
+		};
 	}
 
 	template<
@@ -110,6 +123,8 @@ namespace Core {
 		public:
 			typedef typename EnableIfIsArgType<TempType>::Type Type;
 		};
+
+		static const unsigned int length = Private::LengthHelper<Result>::value;
 	};
 
 	template<>

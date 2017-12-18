@@ -72,6 +72,21 @@ namespace Core {
 	template<class T> struct IsVoid : public FalseType {};
 	template<> struct IsVoid<void> :public TrueType {};
 
+	template<class T> struct IsString : public FalseType {};
+	template<> struct IsString<char*> : public TrueType {};
+	template<> struct IsString<const char*> : public TrueType {};
+	template<> struct IsString<char* const> : public TrueType {};
+	template<> struct IsString<char* const volatile> : public TrueType {};
+	template<> struct IsString<char* volatile> : public TrueType {};
+	template<> struct IsString<const unsigned char*> : public TrueType {};
+	template<> struct IsString<unsigned char*> : public TrueType {};
+	template<> struct IsString<unsigned char* const> : public TrueType {};
+	template<> struct IsString<unsigned char* const volatile> : public TrueType {};
+	template<> struct IsString<unsigned char* volatile> : public TrueType {};
+
+	template<class T> struct IsBool : public FalseType {};
+	template<> struct IsBool<bool> :public TrueType {};
+
 	struct VoidArgType {};
 
 	template<class T> struct IsArgType :

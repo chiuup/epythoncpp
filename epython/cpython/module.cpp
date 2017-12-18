@@ -1,5 +1,4 @@
 #include "module.h"
-#include "scope.h"
 
 PyObject* CPython::InitModule(PyModuleDef * moduleDef, void(*initFunc)()) {
 	PyObject* m = PyModule_Create(moduleDef);

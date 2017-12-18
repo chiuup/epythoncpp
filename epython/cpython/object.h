@@ -1,6 +1,7 @@
 #pragma once
 #include <Python.h>
 #include "core\type_traits.h"
+#include "converter.h"
 
 namespace CPython {
 	namespace Private {
@@ -27,7 +28,9 @@ namespace CPython {
 		inline Object(BorrowedReference& p) : decRef_(true), pyObject_(p.pyObject) { IncRef(); }
 		inline Object(NewReference& p) : decRef_(true), pyObject_(p.pyObject) {}
 
-		virtual ~Object() { if (decRef_) DecRef(); }
+		virtual ~Object() { 
+			if (decRef_) DecRef(); 
+		}
 
 		inline PyObject* pyObject() const { return pyObject_; }
 		Object& pyObject(PyObject* p);
@@ -60,5 +63,17 @@ namespace CPython {
 
 		inline operator PyObject*() const { return pyObject_; }
 		inline operator bool() const { return pyObject_ ? true : false; }
+
+		template<typename T>
+		inline T To() 
+		{
+			return Converter<T>::FromPyObject(pyObject_);
+		}
+
+		template<typename T>
+		static inline Object From(T t)
+		{
+			return Object(NewReference(Converter<T>::ToPyObject(t)));
+		}
 	};
 }

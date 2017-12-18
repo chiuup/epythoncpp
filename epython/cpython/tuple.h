@@ -1,6 +1,7 @@
 #pragma once
 #include <Python.h>
 #include "object.h"
+#include "converter.h"
 
 namespace CPython {
 	class Tuple :public Object {
@@ -16,7 +17,9 @@ namespace CPython {
 		void Set(unsigned int n, Object& item);
 
 		template<typename T>
-		inline T Get(unsigned int n);
+		inline T Get(unsigned int n) {
+			return Converter<T>::FromPyObject(Get<PyObject*>(n));
+		}
 
 		template<>
 		inline PyObject* Tuple::Get<PyObject*>(unsigned int n)
@@ -29,6 +32,7 @@ namespace CPython {
 		template<>
 		inline Object Tuple::Get<Object>(unsigned int n)
 		{
+			assert(n < PyTuple_GET_SIZE(pyObject_));
 			return Object(BorrowedReference(Get<PyObject*>(n)));
 		}
 	};
