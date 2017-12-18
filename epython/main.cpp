@@ -38,7 +38,7 @@ int main()
 
 	{
 		CPython::InterpreterLock lock(&interpreter);
-		CPython::Object fooMod(PyImport_ImportModule("scripts.stuff.foo"));
+		CPython::Object fooMod = CPython::ImportModule("scripts.stuff.foo");
 		if (!fooMod) {
 			PyErr_Print();
 		}

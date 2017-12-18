@@ -8,6 +8,8 @@
 
 namespace CPython {
 	PyObject* InitModule(PyModuleDef* moduleDef, void(*initFunc)());
+	
+	Object ImportModule(const char* name);
 
 	template<typename F>
 	void FunctionDef(const char* name, F func, const char* doc) {
