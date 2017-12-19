@@ -12,15 +12,23 @@ namespace CPython {
 	Object ImportModule(const char* name);
 
 	template<typename F>
-	void FunctionDef(const char* name, F func, const char* doc) {
+	void AddFunction(const char* name, F func, const char* doc) {
 		Function* funcObj = MakeFunction(func);
 		Private::Scope current;
 		funcObj->AddToModule(current, name, doc);
 	}
 
 	template<typename F>
-	void FunctionDef(const char* name, F func) {
-		FunctionDef(name, func, 0);
+	void AddFunction(const char* name, F func) {
+		AddFunction(name, func, 0);
+	}
+
+	template<typename T>
+	void AddConstant(const char* name, T value) {
+		Private::Scope current;
+		Dict moduleDict = current.GetAttr("__dict__");
+		Object pyObj = Object(NewReference(Converter<T>::ToPyObject(value)));
+		moduleDict.Set(name, pyObj);
 	}
 }
 

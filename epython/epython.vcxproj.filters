@@ -18,6 +18,7 @@
     <ClInclude Include="cpython\gil.h" />
     <ClInclude Include="cpython\converter.h" />
     <ClInclude Include="cpython\type_traits.h" />
+    <ClInclude Include="cpython\class.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpython\environment.cpp" />
@@ -29,5 +30,6 @@
     <ClCompile Include="cpython\scope.cpp" />
     <ClCompile Include="cpython\module.cpp" />
     <ClCompile Include="cpython\function.cpp" />
+    <ClCompile Include="cpython\class.cpp" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ namespace CPython {
 
 	PyTypeObject FunctionType = {
 		PyVarObject_HEAD_INIT(NULL, 0)
-		const_cast<char*>("cpython.function"),
+		"cpython.function",
 		sizeof(Function),
 		0,
 		(destructor)FunctionDealloc,               /* tp_dealloc */
@@ -131,6 +131,6 @@ namespace CPython {
 
 		(void)(     // warning suppression for GCC
 			PyObject_INIT(p, &FunctionType)
-			);
+		);
 	}
 }

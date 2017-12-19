@@ -1,8 +1,8 @@
-#include <stdio.h>CPython::FunctionDef("plus", plus, 0);
+#include <stdio.h>
 #include <conio.h>
 #include "cpython\cpython.h"
 #include "core\functor.h"
-
+//#include "cpython\class.h"
 #include "cpython\function.h"
 int plus(int a, int b) {
 	// printf("%d\n", a + b);
@@ -26,9 +26,17 @@ void test()
 	}
 }
 
+class Actor {
+public:
+	Actor() { printf("actor created\n"); }
+	virtual ~Actor() { printf("actor destroyed\n"); }
+};
+
 CPYTHON_MODULE_INIT(ryan_engine) {
-	CPython::FunctionDef("plus", plus);
-	CPython::FunctionDef("minus", minus);
+	CPython::AddFunction("plus", plus);
+	CPython::AddFunction("minus", minus);
+	CPython::AddConstant("TEST_MESSAGE", "Hello World");
+	// CPython::Class<Actor>("Actor");
 }
 
 int main()
