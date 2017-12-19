@@ -30,7 +30,9 @@ else:
         pass
 
     myActor = MyActor()
-    print(myActor.__name__)
+    print(dir(myActor))
+    print(isinstance(myActor, ryan_engine.Actor))
+    print(dir(ryan_engine.Actor))
 
 print("Foo loaded")
 bar = Foo

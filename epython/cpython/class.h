@@ -6,7 +6,7 @@ namespace CPython {
 
 	template<class T>
 	struct Class {
-		Class(const char* name, const char* doc) :classObj_(new ClassObject()) {
+		Class(const char* name, const char* doc) {
 			ClassType.tp_name = name;
 			ClassType.tp_doc = doc;
 			if (Py_TYPE(&ClassType) == 0)
@@ -30,8 +30,11 @@ namespace CPython {
 			~ClassObject() { printf("class obj deleted\n"); }
 		};
 
-		static PyObject* ClassObjectNew(PyTypeObject *subtype, PyObject*args, PyObject* kwargs) {
-
+		static PyObject* ClassObjectNew(PyTypeObject *type, PyObject*args, PyObject* kwargs) {
+			ClassObject* self = new ClassObject();
+			assert(self != NULL);
+			PyObject_INIT((PyObject*)self, &ClassType);
+			return (PyObject*)self;
 		}
 
 		static void ClassObjectDealloc(PyObject* p) {
@@ -41,7 +44,6 @@ namespace CPython {
 		static PyTypeObject ClassType;
 	private:
 		Class();
-		ClassObject* classObj_;
 	};
 
 	template<class T>
