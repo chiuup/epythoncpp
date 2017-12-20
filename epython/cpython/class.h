@@ -5,7 +5,10 @@
 namespace CPython {
 
 	template<class T>
-	struct Class {
+	class Class {
+	public:
+		typedef typename Class<T> Self;
+
 		Class(const char* name, const char* doc) {
 			ClassType.tp_name = name;
 			ClassType.tp_doc = doc;
@@ -28,7 +31,19 @@ namespace CPython {
 		struct ClassObject : PyObject {
 			ClassObject() { printf("class obj created\n"); }
 			~ClassObject() { printf("class obj deleted\n"); }
+		private:
+			T cObj;
 		};
+		
+		template<typename F>
+		Self& AddMethod(const char* name, F func, const char* doc) {
+			return this;
+		}
+
+		template<typename F>
+		Self& AddMethod(const char* name, F func) {
+			return AddMethod<F>(name, func, 0);
+		}
 
 		static PyObject* ClassObjectNew(PyTypeObject *type, PyObject*args, PyObject* kwargs) {
 			ClassObject* self = new ClassObject();
