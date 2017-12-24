@@ -303,6 +303,14 @@ namespace CPython {
 			return invoker_->operator()(self, args, kwargs);
 		}
 
+		inline void AddToType(const Object& type, const char* name, const char* doc) {
+			assert(name != NULL);
+			name_ = Object::From<const char*>(name);
+			if (doc) doc_ = Object::From<const char*>(doc);
+			else doc_ = Object::From<const char*>("");
+			module_ = Object(type);
+			PyObject_GenericSetAttr(type.pyObject(), name_.pyObject(), (PyObject*)this);
+		}
 		inline void AddToModule(const Object& module, const char* name, const char* doc) {
 			assert(name != NULL);
 			name_ = Object::From<const char*>(name);

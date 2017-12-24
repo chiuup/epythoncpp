@@ -16,6 +16,7 @@ namespace CPython {
 		Function* funcObj = MakeFunction(func);
 		Private::Scope current;
 		funcObj->AddToModule(current, name, doc);
+		Py_DECREF((PyObject*)funcObj);
 	}
 
 	template<typename F>

@@ -28,8 +28,11 @@ else:
     print(ryan_engine.Actor.__name__)
     class MyActor(ryan_engine.Actor):
         pass
-
+    ryan_engine.Actor.speak()
+    
+    MyActor.speak()
     myActor = MyActor()
+    myActor.speak()
     print(dir(myActor))
     print(isinstance(myActor, ryan_engine.Actor))
     print(dir(ryan_engine.Actor))

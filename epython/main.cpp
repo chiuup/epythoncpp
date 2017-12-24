@@ -30,13 +30,17 @@ class Actor {
 public:
 	Actor() { printf("actor created\n"); }
 	virtual ~Actor() { printf("actor destroyed\n"); }
+
+	static void Speak() {
+		printf("actor speaks\n");
+	}
 };
 
 CPYTHON_MODULE_INIT(ryan_engine) {
 	CPython::AddFunction("plus", plus);
 	CPython::AddFunction("minus", minus);
 	CPython::AddConstant("TEST_MESSAGE", "Hello World");
-	CPython::Class<Actor>("Actor");
+	CPython::Class<Actor>("Actor").AddMethod("speak", &Actor::Speak);
 }
 
 int main()

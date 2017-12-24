@@ -1,6 +1,7 @@
 #pragma once
 #include <Python.h>
 #include "scope.h"
+#include "function.h"
 
 namespace CPython {
 
@@ -36,8 +37,15 @@ namespace CPython {
 		};
 		
 		template<typename F>
-		Self& AddMethod(const char* name, F func, const char* doc) {
-			return this;
+		Self& AddMethod(const char* name, F func, const char* doc)
+		{
+			Function* funcObj = MakeFunction(func);
+			Object typeObj = Object(BorrowedReference((PyObject*)&ClassType));
+			
+			
+			funcObj->AddToType(typeObj, name, doc);
+			Py_DECREF((PyObject*)funcObj);
+			return *this;
 		}
 
 		template<typename F>
