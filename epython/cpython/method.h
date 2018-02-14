@@ -3,6 +3,7 @@
 #include "core\signature.h"
 #include "tuple.h"
 #include "dict.h"
+#include "function.h"
 
 namespace CPython {
 	namespace Private {
@@ -171,145 +172,6 @@ namespace CPython {
 				ArgType7 a7 = argTuple.Get<ArgType7>(8);
 				ArgType8 a8 = argTuple.Get<ArgType8>(9);
 				(instance->*func_)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
-				Py_RETURN_NONE;
-			}
-		private:
-			F func_;
-			typedef typename C InstanceObjectType;
-			typedef typename Core::Signature<F>::ObjectType ObjectType;
-			typedef typename Core::Signature<F>::ResultType ResultType;
-			typedef typename Core::Signature<F>::Args Args;
-			typedef typename Args::template ArgTypeAtNonStrict<0>::Type ArgType0;
-			typedef typename Args::template ArgTypeAtNonStrict<1>::Type ArgType1;
-			typedef typename Args::template ArgTypeAtNonStrict<2>::Type ArgType2;
-			typedef typename Args::template ArgTypeAtNonStrict<3>::Type ArgType3;
-			typedef typename Args::template ArgTypeAtNonStrict<4>::Type ArgType4;
-			typedef typename Args::template ArgTypeAtNonStrict<5>::Type ArgType5;
-			typedef typename Args::template ArgTypeAtNonStrict<6>::Type ArgType6;
-			typedef typename Args::template ArgTypeAtNonStrict<7>::Type ArgType7;
-			typedef typename Args::template ArgTypeAtNonStrict<8>::Type ArgType8;
-
-		};
-
-		template<typename F, typename C>
-		struct VoidStaticMethodInvokerImpl {
-			VoidStaticMethodInvokerImpl(F f) :func_(f) {}
-			virtual ~VoidStaticMethodInvokerImpl() {}
-
-			template<unsigned int arity>
-			inline PyObject* Invoke(PyObject* self, PyObject* args, PyObject* kwargs);
-
-			template<>
-			inline PyObject* Invoke<0>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				func_();
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<1>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				func_(a0);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<2>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				func_(a0, a1);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<3>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				func_(a0, a1, a2);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<4>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				func_(a0, a1, a2, a3);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<5>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				func_(a0, a1, a2, a3, a4);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<6>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				func_(a0, a1, a2, a3, a4, a5);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<7>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				func_(a0, a1, a2, a3, a4, a5, a6);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<8>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				ArgType7 a7 = argTuple.Get<ArgType7>(7);
-				func_(a0, a1, a2, a3, a4, a5, a6, a7);
-				Py_RETURN_NONE;
-			}
-
-			template<>
-			inline PyObject* Invoke<9>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				ArgType7 a7 = argTuple.Get<ArgType7>(7);
-				ArgType8 a8 = argTuple.Get<ArgType8>(8);
-				func_(a0, a1, a2, a3, a4, a5, a6, a7, a8);
 				Py_RETURN_NONE;
 			}
 		private:
@@ -500,134 +362,6 @@ namespace CPython {
 		};
 
 		template<typename F, typename C>
-		struct StaticMethodInvokerImpl {
-			StaticMethodInvokerImpl(F f) :func_(f) {}
-			virtual ~StaticMethodInvokerImpl() {}
-
-			template<unsigned int arity>
-			inline PyObject* Invoke(PyObject* self, PyObject* args, PyObject* kwargs);
-
-			template<>
-			inline PyObject* Invoke<0>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				return Converter<ResultType>::ToPyObject(func_());
-			}
-
-			template<>
-			inline PyObject* Invoke<1>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				return Converter<ResultType>::ToPyObject(func_(a0));
-			}
-
-			template<>
-			inline PyObject* Invoke<2>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1));
-			}
-
-			template<>
-			inline PyObject* Invoke<3>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2));
-			}
-
-			template<>
-			inline PyObject* Invoke<4>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3));
-			}
-
-			template<>
-			inline PyObject* Invoke<5>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3, a4));
-			}
-
-			template<>
-			inline PyObject* Invoke<6>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3, a4, a5));
-			}
-
-			template<>
-			inline PyObject* Invoke<7>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3, a4, a5, a6));
-			}
-
-			template<>
-			inline PyObject* Invoke<8>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				ArgType7 a7 = argTuple.Get<ArgType7>(7);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3, a4, a5, a6, a7));
-			}
-
-			template<>
-			inline PyObject* Invoke<9>(PyObject* self, PyObject* args, PyObject* kwargs) {
-				Tuple argTuple = Tuple(BorrowedReference(args));
-				ArgType0 a0 = argTuple.Get<ArgType0>(0);
-				ArgType1 a1 = argTuple.Get<ArgType1>(1);
-				ArgType2 a2 = argTuple.Get<ArgType2>(2);
-				ArgType3 a3 = argTuple.Get<ArgType3>(3);
-				ArgType4 a4 = argTuple.Get<ArgType4>(4);
-				ArgType5 a5 = argTuple.Get<ArgType5>(5);
-				ArgType6 a6 = argTuple.Get<ArgType6>(6);
-				ArgType7 a7 = argTuple.Get<ArgType7>(7);
-				ArgType8 a8 = argTuple.Get<ArgType8>(8);
-				return Converter<ResultType>::ToPyObject(func_(a0, a1, a2, a3, a4, a5, a6, a7, a8));
-			}
-		private:
-			F func_;
-			typedef typename C InstanceObjectType;
-			typedef typename Core::Signature<F>::ObjectType ObjectType;
-			typedef typename Core::Signature<F>::ResultType ResultType;
-			typedef typename Core::Signature<F>::Args Args;
-			typedef typename Args::template ArgTypeAtNonStrict<0>::Type ArgType0;
-			typedef typename Args::template ArgTypeAtNonStrict<1>::Type ArgType1;
-			typedef typename Args::template ArgTypeAtNonStrict<2>::Type ArgType2;
-			typedef typename Args::template ArgTypeAtNonStrict<3>::Type ArgType3;
-			typedef typename Args::template ArgTypeAtNonStrict<4>::Type ArgType4;
-			typedef typename Args::template ArgTypeAtNonStrict<5>::Type ArgType5;
-			typedef typename Args::template ArgTypeAtNonStrict<6>::Type ArgType6;
-			typedef typename Args::template ArgTypeAtNonStrict<7>::Type ArgType7;
-			typedef typename Args::template ArgTypeAtNonStrict<8>::Type ArgType8;
-		};
-
-		template<typename F, typename C>
 		struct MethodInvoker : MethodInvokerBase {
 			MethodInvoker(F f) : impl_(InvokerImpl(f)) {}
 			virtual ~MethodInvoker() {}
@@ -639,11 +373,11 @@ namespace CPython {
 			typedef typename Core::If < Core::IsVoid<typename Core::Signature<F>::ResultType>::value,
 				typename Core::If < Core::IsMemberFunctionPointer<typename F>::value,
 				VoidMethodInvokerImpl<F, C>,
-				VoidStaticMethodInvokerImpl<F, C>
+				VoidFunctionInvokerImpl<F>
 				>::Type,
 				typename Core::If < Core::IsMemberFunctionPointer<typename F>::value,
 				MethodInvokerImpl<F, C>,
-				StaticMethodInvokerImpl<F, C>
+				FunctionInvokerImpl<F>
 				>::Type
 			> ::Type InvokerImpl;
 			InvokerImpl impl_;

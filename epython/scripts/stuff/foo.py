@@ -56,6 +56,7 @@ else:
     print(type(MyActor))
     myActor = MyActor("SUPERNAME", 33)
     print(myActor.TEST_VAR)
+    print(myActor.TEST_VAR)
     myActor.speak()
     myActor.private_speak()
     print(myActor.tell_me())
