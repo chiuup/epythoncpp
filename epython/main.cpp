@@ -20,7 +20,7 @@ void test()
 	{
 		/*auto f = CPython::Private::PyCFunctionFactory<plus>::Make(plus);
 		assert(Py_None == f(NULL, NULL));
-	
+
 		auto f2 = CPython::Private::PyCFunctionFactory<minus>::Make(minus);
 		assert(Py_None == f2(NULL, NULL));*/
 	}
@@ -28,19 +28,35 @@ void test()
 
 class Actor {
 public:
-	Actor() { printf("actor created\n"); }
-	virtual ~Actor() { printf("actor destroyed\n"); }
-
+	Actor() { printf("creating actor\n"); }
+	virtual ~Actor() { printf("destroying actor\n"); }
+	void Init(int n) {
+		printf("initing\n");
+		no = n;
+	}
 	static void Speak() {
 		printf("actor speaks\n");
 	}
+
+	void PrivateSpeak() {
+		printf("actor speaks privately %d\n", no);
+	}
+
+	int TellMe() {
+		return no;
+	}
+	int no;
 };
 
 CPYTHON_MODULE_INIT(ryan_engine) {
 	CPython::AddFunction("plus", plus);
 	CPython::AddFunction("minus", minus);
 	CPython::AddConstant("TEST_MESSAGE", "Hello World");
-	CPython::Class<Actor>("Actor").AddMethod("speak", &Actor::Speak);
+	CPython::Class<Actor>("Actor").AddInit(&Actor::Init)
+		.AddMethod("speak", &Actor::Speak)
+		.AddMethod("private_speak", &Actor::PrivateSpeak)
+		.AddMethod("tell_me", &Actor::TellMe)
+		.AddVariable("TEST_VAR", 3000);
 }
 
 int main()

@@ -28,8 +28,8 @@ namespace CPython {
 		inline Object(BorrowedReference& p) : decRef_(true), pyObject_(p.pyObject) { IncRef(); }
 		inline Object(NewReference& p) : decRef_(true), pyObject_(p.pyObject) {}
 
-		virtual ~Object() { 
-			if (decRef_) DecRef(); 
+		virtual ~Object() {
+			if (decRef_) DecRef();
 		}
 
 		inline PyObject* pyObject() const { return pyObject_; }
@@ -48,6 +48,8 @@ namespace CPython {
 		inline Object GetAttr(Object& name) { return Object(NewReference(PyObject_GetAttr(pyObject(), name.pyObject()))); }
 		inline Object GetAttr(const char* name) { return Object(NewReference(PyObject_GetAttrString(pyObject(), name))); }
 
+		inline int size() const { return (int)PyObject_Size(pyObject_); }
+
 		inline Object& operator=(Object& p) { return pyObject(p.pyObject()); }
 		inline Object& operator=(PyObject* p) { return pyObject(p); }
 		inline PyObject* operator->() { return pyObject_; }
@@ -59,13 +61,22 @@ namespace CPython {
 			assert(result != NULL);
 			return Object(NewReference(result));
 		}
-
+		inline Object operator()(Object& args) { 
+			PyObject* result = PyObject_Call(pyObject(), args.pyObject(), NULL);
+			assert(result != NULL);
+			return Object(NewReference(result));
+		}
+		inline Object operator()(Object& args, Object& kwargs) {
+			PyObject* result = PyObject_Call(pyObject(), args.pyObject(), kwargs.pyObject());
+			assert(result != NULL);
+			return Object(NewReference(result));
+		}
 
 		inline operator PyObject*() const { return pyObject_; }
 		inline operator bool() const { return pyObject_ ? true : false; }
 
 		template<typename T>
-		inline T To() 
+		inline T To()
 		{
 			return Converter<T>::FromPyObject(pyObject_);
 		}

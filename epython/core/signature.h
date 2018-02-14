@@ -139,7 +139,7 @@ namespace Core {
 	{
 		typedef C ObjectType;
 		typedef typename EnableIfIsArgType<R>::Type ResultType;
-		typedef typename TypeTuple<NullTupleElement> Args;
+		typedef typename TypeTuple<VoidArgType> Args;
 		static const unsigned int arity = 0;
 	};
 
