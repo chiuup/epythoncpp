@@ -39,11 +39,13 @@ namespace CPython {
 		private:
 			T * instance_;
 		};
-		template<typename T>
-		Self& AddVariable(const char* name, T t) {
+
+		
+		template<typename V>
+		Self& AddVariable(const char* name, V v) {
 			Object typeObj = Object(BorrowedReference((PyObject*)&InstanceType));
 			Object nameObj = Object::From<const char*>(name);
-			PyObject_GenericSetAttr(typeObj.pyObject(), nameObj.pyObject(), Converter<T>::ToPyObject(t));
+			PyObject_GenericSetAttr(typeObj.pyObject(), nameObj.pyObject(), Converter<V>::ToPyObject(v));
 			return *this;
 		}
 
